@@ -1,0 +1,14 @@
+<main>
+    <%- include('../layout/msg'); -%>
+    <h1>login</h1>
+    <form action="/login/enter" method="post">
+        <label for="user">Usuario</label>
+        <input id="user" type="text" name="user">
+        <label for="pass">Senha</label>
+        <input id="pass" type="password" name="pass">
+        <input type="submit" value="Entrar">
+    </form>
+
+    <a href="/new-account">Nova conta</a>
+    <a href="/recover-account">Recuperar conta</a>
+</main>
