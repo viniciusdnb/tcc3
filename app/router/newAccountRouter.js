@@ -1,7 +1,6 @@
 const express = require('express');
 const newAccountRouter = express.Router();
 const newAccountController = require('../controller/newAccountController');
-const loginController = require('../controller/loginController');
 const {checkSchema, validationResult} = require('express-validator');
 
 newAccountRouter.get('/new-account', function(req, res){
