@@ -74,13 +74,14 @@ module.exports = {
                 data_criacao: `${dateNow.getFullYear()}-${dateNow.getMonth()}-${dateNow.getDate()}`
             });
 
-
-
         } catch (error) {
+            
             req.session.strErrorMsg = "Erro ao tentar inserir a nova conta por favor tente novamente";
+            return res.redirect('/login');
         }
+        
         req.session.strSuccessMsg = "Nova conta criada com sucess agora insira o seu email e senha!"
-        return res.redirect('/login')
+        return res.redirect('/login');
     }
 
 }
