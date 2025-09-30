@@ -7,7 +7,7 @@ const aventuraPetController = require('../controller/aventuraPetController');
 
 module.exports = {
     index: function(req, res){
-        
+       
         res.render('login/index', {
             fileName: 'main', 
             msgError: msgSession.getMsgError(req),
@@ -32,9 +32,9 @@ module.exports = {
             req.session.strErrorMsg = "email nao encontrado tente novamente ou cria uma nova conta";
             return res.redirect('/login');
         }
-
-        let idUser = contactUser.id_usuario;
-
+        
+        let arrContactUser = JSON.parse(JSON.stringify(contactUser, null));
+        let idUser = arrContactUser[0].id_usuario;
         let passwordHash = await passwordHashModel.findAll({
             id_usuario: idUser
         });
@@ -52,14 +52,15 @@ module.exports = {
 
         //verifica se a senha passada na requisição é o mesmo que  esta salve
         //negando a verificação para se a senha nao for valida ja direcionar para a tela de login novamente
-        if(!bcrypt.compareSync(req.body.pass, passwordHashUser.password_hash)){
+        
+        if(!bcrypt.compareSync(req.body.pass, passwordHashUser[0].password_hash)){
             if (!req.session.strErrorMsg) {
                 req.session.strErrorMsg = "";
             }
             req.session.strErrorMsg = "senha invalida. por favor tente novamente";
             return res.redirect('/login');
         }
-
+        
         let user = await userModel.findAll({
             where:{
                 id_usuario: idUser
