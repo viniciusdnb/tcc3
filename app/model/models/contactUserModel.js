@@ -18,7 +18,7 @@ const contactUserModel = connect.define(
             allowNull: false
         },
         cep:{
-            type:DataTypes.STRING(7),
+            type:DataTypes.STRING(8),
             allowNull: false
         },
         email:{
