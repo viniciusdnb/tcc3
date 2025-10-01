@@ -57,7 +57,7 @@ module.exports = {
             if (!req.session.strErrorMsg) {
                 req.session.strErrorMsg = "";
             }
-            req.session.strErrorMsg = "senha invalida. por favor tente novamente";
+            req.session.strErrorMsg = "senha invalida. por favor tente novamente2";
             return res.redirect('/login');
         }
         

@@ -10,7 +10,7 @@ loginRouter.get('/login', function (req, res) {
 
 loginRouter.post('/login/enter',
     checkSchema({
-        user: {
+        email: {
             in: ['body'],
             errorMessage: "email invalido",
             trim: true,
@@ -37,13 +37,14 @@ loginRouter.post('/login/enter',
     }),
     function (req, res) {
         let errorResult = validationResult(req);
+        
         if (!errorResult.isEmpty()) {
             if (!req.session.strErrorMsg) {
                 req.session.strErrorMsg = "";
             }
             req.session.strErrorMsg = "senha invalido tente novamente";
-            res.redirect('/login');
-            req.session.strErrorMsg = "";
+            return res.redirect('/login');
+            
         }
 
         loginController.enter(req, res);
