@@ -26,3 +26,10 @@ CREATE TABLE password_hash(
     data_inativacao DATE,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
+
+CREATE TABLE imagem_pet(
+    id_imagem_pet INT PRIMARY key AUTO_INCREMENT,
+    id_usuario INT,
+    imagem LONGBLOB,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+);
