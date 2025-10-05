@@ -7,7 +7,9 @@ const newAccountRouter = require('./app/router/newAccountRouter');
 const loginRouter = require('./app/router/loginRouter');
 const session = require('express-session');
 const aventuraPetRouter = require('./app/router/aventuraPetRouter');
+const fileUpload = require('express-fileupload');
 
+app.use(fileUpload());
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
