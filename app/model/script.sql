@@ -27,10 +27,17 @@ CREATE TABLE password_hash(
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
-CREATE TABLE imagem_pet(
-    id_imagem_pet INT PRIMARY key AUTO_INCREMENT,
-    nome_pet VARCHAR(50)
-    id_usuario INT,
-    imagem LONGBLOB,
+CREATE TABLE pet_user(
+    id_user_pet INT PRIMARY key AUTO_INCREMENT,
+    id_usuario INT,   
+    nome_pet VARCHAR(50),
+    disponivel BOOLEAN,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE image_pet(
+    id_imagem_pet INT PRIMARY KEY AUTO_INCREMENT,
+    id_user_pet INT,
+    imagem LONGBLOB,
+    FOREIGN KEY (id_user_pet) REFERENCES pet_user(id_user_pet)
 );
