@@ -29,6 +29,7 @@ CREATE TABLE password_hash(
 
 CREATE TABLE imagem_pet(
     id_imagem_pet INT PRIMARY key AUTO_INCREMENT,
+    nome_pet VARCHAR(50)
     id_usuario INT,
     imagem LONGBLOB,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
