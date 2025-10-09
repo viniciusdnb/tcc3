@@ -1,25 +1,23 @@
 const connect = require('../connect');
-const {DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 
-const imagemPetModel = connect.define(
-    'imagem_pet',{
+
+const imagePet = connect.define(
+    'image_pet',
+    {
         id_imagem_pet:{
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement:true
+            type:DataTypes.INTEGER,
+            primaryKey:true,
+            autoIncrement: true
         },
-        nome_pet:{
-            type: DataTypes.CHAR(50),
-            allowNull: null
-        },
-        id_usuario:{
-            type: DataTypes.INTEGER,
+        id_user_pet:{
+            type:DataTypes.INTEGER,
             allowNull: false
         },
         imagem:{
-            type: DataTypes.BLOB,
+            type: DataTypes.BLOB('long'),
             allowNull: false
-        }
+        },
     },
     {
         timestamps:false,
@@ -27,4 +25,4 @@ const imagemPetModel = connect.define(
     }
 );
 
-module.exports = imagemPetModel;
+module.exports = imagePet;
