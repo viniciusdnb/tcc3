@@ -2,7 +2,7 @@ const connect = require('../connect');
 const { DataTypes } = require('sequelize');
 
 
-const imagePet = connect.define(
+const imagePetModel = connect.define(
     'image_pet',
     {
         id_imagem_pet:{
@@ -25,4 +25,4 @@ const imagePet = connect.define(
     }
 );
 
-module.exports = imagePet;
+module.exports = imagePetModel;

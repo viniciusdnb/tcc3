@@ -1,15 +1,8 @@
 const express = require('express');
 const aventuraPetRouter = express.Router();
 const aventuraPetController = require('../controller/aventuraPetController');
-
-const {isImage, imageValidationResult} = require('express-image-validator');
 const { checkSchema, validationResult } = require('express-validator');
-
-const schema = isImage('imgpet',{
-    require: true,
-    limit: 3,
-    allowedMimeTypes: ['image/jpeg', 'image/png', 'image/jpg']
-});
+const uploads = require('../libs/multerFunctions');
 
 
 const isAutentication = function (req, res, next) {
@@ -34,6 +27,7 @@ aventuraPetRouter.get('/aventura-pet/add-pet', isAutentication, function (req, r
 });
 
 aventuraPetRouter.post('/aventura-pet/add-img', 
+    uploads.single('namepet'),
     isAutentication,
     checkSchema({
         namepet:{
@@ -49,19 +43,11 @@ aventuraPetRouter.post('/aventura-pet/add-img',
                 }
             }
         }
-    }),
-    schema,
+    }),   
     function(req, res){
-    const imgResult = imageValidationResult(req);
     const errorResult = validationResult(req);
         
-    if(!imgResult.isEmpty()){
-        if(!req.session.strErrorMsg){
-            req.session.strErrorMsg = "";
-        }
-         req.session.strErrorMsg = "imagem invalida tente novamente"
-        return res.redirect('/aventura-pet')
-    }
+
     if(!errorResult.isEmpty()){
         if(!req.session.strErrorMsg){
             req.session.strErrorMsg = "";
@@ -71,9 +57,10 @@ aventuraPetRouter.post('/aventura-pet/add-img',
         return res.redirect('/aventura-pet')
     }
     
- 
-
-    console.log("imgem e nome concluido");
+ console.log(req.file)
+    //aventuraPetController.insertImgPet(req, res);
+    
 })
 
 module.exports = aventuraPetRouter;
+
