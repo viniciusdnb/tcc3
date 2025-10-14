@@ -2,8 +2,10 @@ const express = require('express');
 const aventuraPetRouter = express.Router();
 const aventuraPetController = require('../controller/aventuraPetController');
 const { checkSchema, validationResult } = require('express-validator');
-const uploads = require('../libs/multerFunctions');
-
+//const uploads = require('../libs/multerFunctions');
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const uploads = multer({storage: storage});
 
 const isAutentication = function (req, res, next) {
     if (!req.session.autentication) {
@@ -27,7 +29,7 @@ aventuraPetRouter.get('/aventura-pet/add-pet', isAutentication, function (req, r
 });
 
 aventuraPetRouter.post('/aventura-pet/add-img', 
-    uploads.single('namepet'),
+    uploads.single('imgpet'),
     isAutentication,
     checkSchema({
         namepet:{
@@ -57,9 +59,13 @@ aventuraPetRouter.post('/aventura-pet/add-img',
         return res.redirect('/aventura-pet')
     }
     
- console.log(req.file)
-    //aventuraPetController.insertImgPet(req, res);
+ 
+    aventuraPetController.insertImgPet(req, res);
     
+});
+
+aventuraPetRouter.get('/aventura-pet/get-img', function(req, res){
+    aventuraPetController.getImgPet(req, res)
 })
 
 module.exports = aventuraPetRouter;

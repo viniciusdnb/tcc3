@@ -1,6 +1,6 @@
 const multer = require('multer');
 
-const savePath = multer.diskStorage({
+/*const savePath = multer.diskStorage({
     //determina o diretorio onde sera salvo o arquivo
     destination: function(req, file, callback){
         callback(null,'uploads/');
@@ -11,7 +11,7 @@ const savePath = multer.diskStorage({
     }
     
     
-});
+});*/
 
 const uploads = multer({
     storage:savePath,
